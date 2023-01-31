@@ -1,0 +1,34 @@
+
+#details {
+    font-family: 'Pinyon Script', cursive;
+    color:rgb(1, 1, 75);
+    font-size: 1.35em;
+}
+p {
+    font-size: 1.35em;
+    font-weight: bold;
+    text-shadow: 0.1em 0.15em 0.2em white;
+}
+body {
+    background-image: url(https://i.pinimg.com/originals/87/c1/2e/87c12ec23d483ebeebe83279af05d359.jpg);
+    background-size: cover;
+}
+img {
+    width: 800px;
+    height: auto;
+    border: 3px solid black;
+}
+h1 {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 3.15em !important;
+    text-shadow: 0.1em 0.05em 0.2em white;
+}
+h2 {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 1.5em !important;
+    text-shadow: 0.1em 0.05em 0.2em white;
+}
+
+#buttonarea {
+    font-family: 'Uncial Antiqua', cursive;
+}
