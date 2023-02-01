@@ -262,7 +262,7 @@ const correctRoute2 = new Environment("Friendly Fairy's Cabin");
 correctRoute2.description = `it is a small cosy Fairy's living room filled with colourful flowers and various knickknacks on the shelves`;
 correctRoute2.image = "https://i.pinimg.com/originals/02/c5/59/02c559edd236ffefc44c98e7a7e5617a.jpg";
 correctRoute2.character = fairy;
-correctRoute2.item = magicKey;
+// correctRoute2.item = magicKey;
 const correctRoute3 = new Environment("Waterfall");
 correctRoute3.description = `it is a fantasy waterfall with a small pool at the bottom blooming with exotic flowers`;
 correctRoute3.image = "https://c4.wallpaperflare.com/wallpaper/522/706/519/fantasy-landscape-lake-waterfall-hd-wallpaper-preview.jpg";
@@ -273,7 +273,7 @@ const incorrectRoute2 = new Environment("Evil Witch's Castle");
 incorrectRoute2.description = `it is a luxiurious, but menacing room in the castle with a massive painting of its owner and a large ornatebed`;
 incorrectRoute2.image = "https://i.pinimg.com/originals/42/33/a1/4233a17feb986420ecd5e248827ad31f.jpg";
 incorrectRoute2.character = witch;
-incorrectRoute2.item = rustyKey;
+// incorrectRoute2.item = rustyKey;
 const incorrectRoute3 = new Environment("Graveyard");
 incorrectRoute3.description = `it is a creepy graveyard with tombstones and a crows swarming around`;
 incorrectRoute3.image = "https://cdna.artstation.com/p/assets/images/images/002/748/540/large/yang-qi-.jpg?1465263258";
@@ -281,7 +281,7 @@ const dragonLair = new Environment("Dragon's Lair");
 dragonLair.description = `it is a red-flame lit cave lined with treasure and skeletons of those who have tried to steal it from the Dragon`;
 dragonLair.image = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7499d872-919e-49d2-b98c-29be33df9d4c/d7xo86x-84a88c18-8dee-4d49-b957-c37b179320e8.jpg/v1/fill/w_1024,h_589,q_75,strp/dragon_s_lair_by_grosnez_d7xo86x-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTg5IiwicGF0aCI6IlwvZlwvNzQ5OWQ4NzItOTE5ZS00OWQyLWI5OGMtMjliZTMzZGY5ZDRjXC9kN3hvODZ4LTg0YTg4YzE4LThkZWUtNGQ0OS1iOTU3LWMzN2IxNzkzMjBlOC5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.zjjEGvyy5PrcBWJV_KCFDVd_yUQcKTPsFRKFPBHO97g";
 dragonLair.character = dragon;
-dragonLair.item = treasureChest;
+//dragonLair.item = treasureChest;
 
 
 //Link the environments together
@@ -303,31 +303,76 @@ dragonLair.linkEnvironment("west", incorrectRoute3);
 incorrectRoute3.linkEnvironment("east", dragonLair);
 
 
-  //Subroutine to display information about the current environment
+//Riddles object
+// const riddles = [
+//   {
+//       question: "What is more useful when it is broken?",
+//       answer1:   "A sword",
+//       answer2:   "An egg",
+//       answer3:   "A nose",
+//       correctAnswer: "An egg",
+//   },
+//   {
+//       question: "What belongs to you, but other people use it more than you?",
+//       answer1:   "Your house",
+//       answer2:   "Your backpack",
+//       answer3:   "Your name",
+//       correctAnswer: "Your name",
+//   },
+//   {
+//     question: "You have me today, Tomorrow you'll have more; As your time passes, I'm not easy to store; I don't take up space, But I'm only in one place; I am what you saw, But not what you see. What am I?",
+//     answer1:   "Time",
+//     answer2:   "Memories",
+//     answer3:   "Money",
+//     correctAnswer: "Memories",
+// },
+// ]
+
+//let currentRiddle = 0;
+// let shownRiddle = riddles[currentRiddle]
+
+// loadRiddle()
+
+// function loadRiddle() {
+//     deselectAnswers()
+
+//     const shownRiddle = quizQuestions[currentQuizIndex]
+
+//     question.innerText = shownRiddle.question
+//     answer1.innerText = shownRiddle.answer1
+//     answer2.innerText = shownRiddle.answer2
+//     answer3.innerText = shownRiddle.answer3
+// };
+
+  
+// let bossAttack = 0;
+
+//Subroutine to display information about the current environment
 
 function displayEnvironmentInfo(environment) {
+
+
   let occupantMsg = ""
-  let bossMsg = ""
+  
+  //let bossMsg = ""
 
   if (environment.character === "") {
     occupantMsg = ""
   } else {
-    occupantMsg = environment.character.describe() + ". " + environment.character.converse()
-    //environment.item.itemAlert()
-       
-    if ( environment.character.ability === undefined ) {
-      bossMsg = ""
+    occupantMsg = environment.character.describe() + ". " + environment.character.converse() // SOMETHING IS BROKEN HERE - ENVIRONMENTS WITH CHARACTERS DON'T LOAD
+    // environment.item.itemAlert()
+   if ( environment.character.ability === undefined ) {
+    bossMsg = ""
     } else {
-    //   for (let i = 0, i < environment.character.ability.length; i++) {
-    //     console.log(environment.character.ability[i])
-    //     bossMsg = "<br>" + "<h2>" + environment.character.name + " attacks you with " + environment.character.ability[i] + "! </h2>";
-    //    console.log( environment.character.ability[i] + " is the SPECIAL ability of this boss!" );
+    //   for (let i = 0, i < bossAttack.length; i++) {
+    //     console.log(bossAttack[i])
+      bossMsg = "<br>" + "<h2>" + environment.character.name + " attacks you with " + environment.character.ability + "! </h2>";
+    //    console.log( bossAttack[i] + " is the SPECIAL ability of this boss!" );
     //   }
     // }
-    bossMsg = "<br>" + "<h2>" + environment.character.name + " attacks you with " + environment.character.ability + "! </h2>";
+    // bossMsg = "<br>" + "<h2>" + environment.character.name + " attacks you with " + bossAttack + "! </h2>";
     }
-  } 
-
+  }
   textContent = "<p>" + environment.describe() + "</p>" + "<p>" + occupantMsg + "</p>" + "<p>" + environment.getDetails() + "</p>" + bossMsg;
 
   document.getElementById("textarea").innerHTML = textContent;
@@ -349,25 +394,26 @@ function startGame() {
   document.addEventListener("keydown", function (event) {
 
     if (event.key === "Enter") {
+
       command = document.getElementById("usertext").value;
       const directions = ["north", "south", "east", "west"]
 
       if (directions.includes(command.toLowerCase())) {
+
         currentEnvironment = currentEnvironment.move(command)
         displayEnvironmentInfo(currentEnvironment);
-        /*   if (currentEnvironment.actions.lenght  === 0) {
-             return;
-           } else {
-             document.getElementById("userActions").innerHTML = "";
-           }*/
         document.getElementById("image-holder").src = currentEnvironment.image;
+
       } else {
+
         document.getElementById("usertext").value = ""
         alert("That is not a valid command, please try again.")
+
       }
     }
   });
 }
+
 startGame();
 
 //JS STYLING - Function that adds background color to the input element on focus
