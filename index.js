@@ -231,12 +231,12 @@ fairy.description = `a tiny fairy with a large pink dress and a large pink bow i
 fairy.conversation = `Hello there, stranger. Welcome to my humble abode. Are you lost?`;
 const witch = new Character("Witch");
 witch.description = `a lady with cat-like yellow eyes, pale green skin dressed in a black gown, and a crown made of tangled up thorns.`;
-witch.conversation = `How dare you barge into my castle uninvited! What business do you have here?`;
+witch.conversation = `How dare you barge into my castle uninvited! What business do you have here? I am the Witch of the West Lands, and I will not tolerate your presence here anymore! I will turn you into a frog if you don't leave right now!`;
 
 //Create the Boss subclass
 const dragon = new Boss("Dragon");
 dragon.description = `a large scary creature with red scales and a fiery breath`;
-dragon.conversation = `You dare to challenge me? Prepare to die!`;
+dragon.conversation = `What are you doing in my lair, pesky adventurer? I am the legendary Smaug, I have guarded this treasure for centuries and I will until the end of time... You'd better leave before I decide to make you my next meal!`;
 dragon.ability = `Fire Breath`;
 // dragon.ability = [`Claw Attack`, `Tail Swipe`, `Fire Breath`];
 
@@ -364,9 +364,14 @@ function displayEnvironmentInfo(environment) {
     if ( environment.character.ability === undefined ) {
     bossMsg = ""
     } else {
-      bossMsg = `<br> <h2> ${environment.character.name} attacks you with ${environment.character.ability}! But you successfully dodge the attack and manage to stab the ${environment.character.name} straight into the heart.
+      bossMsg = `<p> You start walking deeper into the cave and feel the adrenaline rushing through your body as the ${environment.character.name} gets up from its nest and rushes towards you.
+      This creature is about ten times bigger than you, skin covered in shiny scales and a hefty tail. But you are not intimidated. ${environment.character.name} roars:
+      <br> “That's it I've had it with you! You are not getting your dirty hands on even one piece of my precious treasure. It's all mine, MINE!!! Prepare to die!” </p> 
+      <h2> ${environment.character.name} attacks you with ${environment.character.ability}! But you successfully dodge the attack and manage to stab the ${environment.character.name} straight into the heart.
       </h2> <br> <h2> You have defeated the ${environment.character.name}!</h2>
-      <br> <p> Turns out ${environment.character.name} has been guarding a ${environment.item.name}! </p>`;
+      <br> <p> ${environment.character.name}'s body slumps down to the ground and all of the precious jewels and gold coins are launched into the air when its tail hits the treasure. <br>
+      Feeling victorious and elated you walk straight to the ${environment.item.name}. The runes etched on the lock start glistening once you get closer to it, reacting to the key in you hold in your palm by some sort of magical enchantment. 
+      The moment has finally come! You bend down and get ready to unlock it... </p> <br>`;
     }
   }
   titleContent = environment.name;
