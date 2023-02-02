@@ -47,19 +47,11 @@ class Environment {
   }
 
   set character(value) {
-    if (value.length < 4) {
-      alert("Character name is too short.");
-      return;
-    } 
     this._character = value;
   }
 
   set item(value) {
-    if (value.length < 4) {
-      alert("Item name is too short.");
-      return;
-    } 
-    this._character = value;
+    this._item = value;
   }
 
   set image(value) {
@@ -112,6 +104,7 @@ class Environment {
     }
   }
 }
+let inventory = ["A loaf of stale bread", " an old map", " an empty coin pouch"];
 
 class Item {
   constructor(name) {
@@ -132,7 +125,7 @@ class Item {
       alert("Decription is too short.");
       return;
     }
-    this._name = value;
+    this._description = value;
   }
 
   get name() {
@@ -145,21 +138,25 @@ class Item {
 
   // a method to produce friendly item description
 
-  describe() {
-    return "The " + this._name + " is " + this._description;
+  describeItem() {
+    return "You found a " + this._name + ". It is " + this._description;
   }
   
-  // itemAlert() {
-  //   return alert("You have found: " + this._name);
-  // }
+  itemAdd() {
+    console.log(this._name)
+    inventory.push[this._name]
+    console.log("You have in your inventory: " + inventory)
+    return;
+  }
 }
 
 //class Enemy extends Character {
 class Character {
   constructor(name) {
     this._name = name,
-      this._description = ""
+    this._description = ""
     this._conversation = ""
+    
   }
   set name(value) {
     if (value.length < 5) {
@@ -226,7 +223,10 @@ showAbility() {
 //Create the characters
 const merchant = new Character("Merchant");
 merchant.description = `a vagabond trader dressed in most interesting garments, with a large backpack on his shoulders and a large dusty hat`;
-merchant.conversation = `Hello there, stranger. I have many interesting items for sale. What would you like to buy? <br> Oh, but you happen to have no coin. Never mind then. Move along...`;
+merchant.conversation = `Hello there, stranger. I have many interesting items for sale. <br> 
+50% off the mighty Eccalibur! Healing potions 100 gold each today only!!! <br> What would you like to buy? <br> 
+Oh, but you happen to have no coin on you... Well well, what a shame, I remember being a young explorer just like you once and all of the hardships 
+I had to go through just to earn my first gold coin. Here, have this dagger free of charge, it does not serve me anymore.`;
 const fairy = new Character("Fairy");
 fairy.description = `a tiny fairy with a large pink dress and a large pink bow in her hair`;
 fairy.conversation = `Hello there, stranger. Welcome to my humble abode. Are you lost?`;
@@ -243,6 +243,8 @@ dragon.ability = `Fire Breath`;
 
 
 //Create the items here
+const bronzeDagger = new Item("Bronze dagger");
+bronzeDagger.description = `looks a bit worn and cracked but you hope it will do the job.`;
 const rustyKey = new Item("Rusty Old Key");
 rustyKey.description = `a rather large iron key all covered in rust, which has some mysterious looking symbols carved into it.`;
 const magicKey = new Item("Sparkling Magic Key");
@@ -255,6 +257,7 @@ const tradingTown = new Environment("Dragonville");
 tradingTown.description = `it is a fairly big medieval trading town with a few shops and a tavern in the main square of the town.`;
 tradingTown.image = "https://c4.wallpaperflare.com/wallpaper/257/647/711/fantasy-art-digital-town-people-fantasy-architecture-hd-wallpaper-preview.jpg";
 tradingTown.character = merchant;
+tradingTown.item = bronzeDagger;
 const correctRoute1 = new Environment("Peaceful Forest");
 correctRoute1.description = `it is a lush green forest with a small stream running through it full of mushrooms and berries`;
 correctRoute1.image = "https://cdn1.epicgames.com/ue/product/Featured/FantasyForestEnvironment_featured-894x488-43e95910bb1a42e45f170e35a54d1823.png";
@@ -262,7 +265,7 @@ const correctRoute2 = new Environment("Friendly Fairy's Cabin");
 correctRoute2.description = `it is a small cosy Fairy's living room filled with colourful flowers and various knickknacks on the shelves`;
 correctRoute2.image = "https://i.pinimg.com/originals/02/c5/59/02c559edd236ffefc44c98e7a7e5617a.jpg";
 correctRoute2.character = fairy;
-// correctRoute2.item = magicKey;
+correctRoute2.item = magicKey;
 const correctRoute3 = new Environment("Waterfall");
 correctRoute3.description = `it is a fantasy waterfall with a small pool at the bottom blooming with exotic flowers`;
 correctRoute3.image = "https://c4.wallpaperflare.com/wallpaper/522/706/519/fantasy-landscape-lake-waterfall-hd-wallpaper-preview.jpg";
@@ -270,10 +273,10 @@ const incorrectRoute1 = new Environment("Terrifying Forest");
 incorrectRoute1.description = "it is a dark and gloomy forest with trees covered in moss and spider webs";
 incorrectRoute1.image = "https://i.pinimg.com/originals/bf/1d/16/bf1d1605e62b31685316fa5ab1f7a32d.jpg";
 const incorrectRoute2 = new Environment("Evil Witch's Castle");
-incorrectRoute2.description = `it is a luxiurious, but menacing room in the castle with a massive painting of its owner and a large ornatebed`;
+incorrectRoute2.description = `it is a luxurious, but menacing room in the castle with a massive painting of its owner and a large ornatebed`;
 incorrectRoute2.image = "https://i.pinimg.com/originals/42/33/a1/4233a17feb986420ecd5e248827ad31f.jpg";
 incorrectRoute2.character = witch;
-// incorrectRoute2.item = rustyKey;
+incorrectRoute2.item = rustyKey;
 const incorrectRoute3 = new Environment("Graveyard");
 incorrectRoute3.description = `it is a creepy graveyard with tombstones and a crows swarming around`;
 incorrectRoute3.image = "https://cdna.artstation.com/p/assets/images/images/002/748/540/large/yang-qi-.jpg?1465263258";
@@ -281,7 +284,7 @@ const dragonLair = new Environment("Dragon's Lair");
 dragonLair.description = `it is a red-flame lit cave lined with treasure and skeletons of those who have tried to steal it from the Dragon`;
 dragonLair.image = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7499d872-919e-49d2-b98c-29be33df9d4c/d7xo86x-84a88c18-8dee-4d49-b957-c37b179320e8.jpg/v1/fill/w_1024,h_589,q_75,strp/dragon_s_lair_by_grosnez_d7xo86x-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTg5IiwicGF0aCI6IlwvZlwvNzQ5OWQ4NzItOTE5ZS00OWQyLWI5OGMtMjliZTMzZGY5ZDRjXC9kN3hvODZ4LTg0YTg4YzE4LThkZWUtNGQ0OS1iOTU3LWMzN2IxNzkzMjBlOC5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.zjjEGvyy5PrcBWJV_KCFDVd_yUQcKTPsFRKFPBHO97g";
 dragonLair.character = dragon;
-//dragonLair.item = treasureChest;
+dragonLair.item = treasureChest;
 
 
 //Link the environments together
@@ -350,30 +353,22 @@ incorrectRoute3.linkEnvironment("east", dragonLair);
 //Subroutine to display information about the current environment
 
 function displayEnvironmentInfo(environment) {
-
-
+console.log(environment);
   let occupantMsg = ""
-  
-  //let bossMsg = ""
+  let bossMsg = ""
 
   if (environment.character === "") {
     occupantMsg = ""
   } else {
-    occupantMsg = environment.character.describe() + ". " + environment.character.converse() // SOMETHING IS BROKEN HERE - ENVIRONMENTS WITH CHARACTERS DON'T LOAD
-    // environment.item.itemAlert()
-   if ( environment.character.ability === undefined ) {
+    occupantMsg = "<p>" + environment.character.describe() + ". " + environment.character.converse()  + "</p>"+ "<h2>" + environment.item.describeItem() + "</h2>";
+    environment.item.itemAdd()
+    if ( environment.character.ability === undefined ) {
     bossMsg = ""
     } else {
-    //   for (let i = 0, i < bossAttack.length; i++) {
-    //     console.log(bossAttack[i])
       bossMsg = "<br>" + "<h2>" + environment.character.name + " attacks you with " + environment.character.ability + "! </h2>";
-    //    console.log( bossAttack[i] + " is the SPECIAL ability of this boss!" );
-    //   }
-    // }
-    // bossMsg = "<br>" + "<h2>" + environment.character.name + " attacks you with " + bossAttack + "! </h2>";
     }
   }
-  textContent = "<p>" + environment.describe() + "</p>" + "<p>" + occupantMsg + "</p>" + "<p>" + environment.getDetails() + "</p>" + bossMsg;
+  textContent = "<p>" + environment.describe() + "</p>" + occupantMsg + "<p>" + environment.getDetails() + "</p>" + bossMsg;
 
   document.getElementById("textarea").innerHTML = textContent;
   document.getElementById("buttonarea").innerHTML = '><input type="text" class="text-center p-2 m-3" id="usertext" placeholder="Enter your choice here" onfocus="inputFocus()" />';
