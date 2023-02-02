@@ -61,7 +61,7 @@ class Environment {
   //a method to produce friendly environment description
 
   describe() {
-    return "Looking around the " + this._name + " you can see " + this._description;
+    return `Looking around the ${this._name} you can see ${this._description}`;
   }
 
   //a method to add environments to link environments to this one. It does this by adding them to _linkedEnvironments
@@ -82,7 +82,7 @@ class Environment {
     //Loop through the entries and add a description of each environment to the details array so user can choose where to go
 
     for (const [direction, environment] of entries) {
-      let text = " The " + environment._name + " is to the " + direction;
+      let text = `<p class="text-center"> The ${environment._name} is to the: </p> <h2 class="m-0 p-0"> ${direction.toUpperCase()} </h2>`;
       details.push(text);
     }
     return details;
@@ -98,13 +98,13 @@ class Environment {
     if (direction in this._linkedEnvironments) {
       return this._linkedEnvironments[direction];
     } else {
-      alert("You can't go that way",);
+      alert("You can't go that way");
       alert(this._name)
       return this; //or return;
     }
   }
 }
-let inventory = ["A loaf of stale bread", " an old map", " an empty coin pouch"];
+let inventory = ["Old map", "empty coin pouch"];
 
 class Item {
   constructor(name) {
@@ -139,13 +139,13 @@ class Item {
   // a method to produce friendly item description
 
   describeItem() {
-    return "You found a " + this._name + ". It is " + this._description;
+    return `You have found a ${this._name}. It is ${this._description}`;
   }
   
   itemAdd() {
     console.log(this._name)
     inventory.push[this._name]
-    console.log("You have in your inventory: " + inventory)
+    console.log(`You have in your inventory: ${inventory}`)
     return;
   }
 }
@@ -196,12 +196,12 @@ class Character {
   // A method to produce friendly character description
 
   describe() {
-    return "You have met the " + this._name + ". " + "<br>" + this._name + " is " + this._description;
+    return `<h2>You have met the ${this._name}.</h2> ${this._name} is ${this._description}`;
   }
 
   //a method to produce friendly conversation text
   converse() {
-    return this._name + " says: " + "<br>" + "“" + this._conversation + "”";
+    return `${this._name} says: <br> <p class="mt-5 mb-5">“${this._conversation}”</p>`;
   }
 }
 
@@ -212,7 +212,7 @@ class Boss extends Character {
     this._ability = "";
 }
 showAbility() {
-  return console.log(this._name + ' uses: ' + this._ability);
+  return console.log(`${this._name} uses: ${this._ability}.`);
 }
 }
 
@@ -223,10 +223,9 @@ showAbility() {
 //Create the characters
 const merchant = new Character("Merchant");
 merchant.description = `a vagabond trader dressed in most interesting garments, with a large backpack on his shoulders and a large dusty hat`;
-merchant.conversation = `Hello there, stranger. I have many interesting items for sale. <br> 
-50% off the mighty Eccalibur! Healing potions 100 gold each today only!!! <br> What would you like to buy? <br> 
-Oh, but you happen to have no coin on you... Well well, what a shame, I remember being a young explorer just like you once and all of the hardships 
-I had to go through just to earn my first gold coin. Here, have this dagger free of charge, it does not serve me anymore.`;
+merchant.conversation = `Hello there, stranger. I have many interesting items for sale.
+50% off the mighty Eccalibur! Healing potions 100 gold each today only!!! What would you like to buy? <br> 
+Oh, but you happen to have no coin on you... Oh, I remember back in the day being a young explorer just like you. Here, have this dagger free of charge, may it lead you to great adventures.`;
 const fairy = new Character("Fairy");
 fairy.description = `a tiny fairy with a large pink dress and a large pink bow in her hair`;
 fairy.conversation = `Hello there, stranger. Welcome to my humble abode. Are you lost?`;
@@ -244,13 +243,13 @@ dragon.ability = `Fire Breath`;
 
 //Create the items here
 const bronzeDagger = new Item("Bronze dagger");
-bronzeDagger.description = `looks a bit worn and cracked but you hope it will do the job.`;
+bronzeDagger.description = `looks a bit worn and old but you hope it will do the job.`;
 const rustyKey = new Item("Rusty Old Key");
 rustyKey.description = `a rather large iron key all covered in rust, which has some mysterious looking symbols carved into it.`;
 const magicKey = new Item("Sparkling Magic Key");
 magicKey.description = `a tiny key made of pure gold, which has a sparkling blue gemstone embedded in the middle of it. It comes alive with a magical glow when you hold it in your hand.`;
 const treasureChest = new Item("Treasure Chest");
-treasureChest.description = `an immense treasure chest made of solid oak, which is covered in intricate carvings of dragons and other mythical creatures. It has been guarded by the dragon for many centuries. Do you have the right key to unlock it?`;
+treasureChest.description = `massive and on the front of it hangs an ancient engraved lock.`;
 
 //ENVIRONMENT OBJECTS defined here
 const tradingTown = new Environment("Dragonville");
@@ -259,29 +258,29 @@ tradingTown.image = "https://c4.wallpaperflare.com/wallpaper/257/647/711/fantasy
 tradingTown.character = merchant;
 tradingTown.item = bronzeDagger;
 const correctRoute1 = new Environment("Peaceful Forest");
-correctRoute1.description = `it is a lush green forest with a small stream running through it full of mushrooms and berries`;
+correctRoute1.description = `it is a lush green forest with a small stream running through it full of mushrooms and berries.`;
 correctRoute1.image = "https://cdn1.epicgames.com/ue/product/Featured/FantasyForestEnvironment_featured-894x488-43e95910bb1a42e45f170e35a54d1823.png";
 const correctRoute2 = new Environment("Friendly Fairy's Cabin");
-correctRoute2.description = `it is a small cosy Fairy's living room filled with colourful flowers and various knickknacks on the shelves`;
+correctRoute2.description = `it is a small cosy Fairy's living room filled with colourful flowers and various knickknacks on the shelves.`;
 correctRoute2.image = "https://i.pinimg.com/originals/02/c5/59/02c559edd236ffefc44c98e7a7e5617a.jpg";
 correctRoute2.character = fairy;
 correctRoute2.item = magicKey;
 const correctRoute3 = new Environment("Waterfall");
-correctRoute3.description = `it is a fantasy waterfall with a small pool at the bottom blooming with exotic flowers`;
+correctRoute3.description = `it is a fantasy waterfall with a small pool at the bottom blooming with exotic flowers.`;
 correctRoute3.image = "https://c4.wallpaperflare.com/wallpaper/522/706/519/fantasy-landscape-lake-waterfall-hd-wallpaper-preview.jpg";
 const incorrectRoute1 = new Environment("Terrifying Forest");
-incorrectRoute1.description = "it is a dark and gloomy forest with trees covered in moss and spider webs";
+incorrectRoute1.description = "it is a dark and gloomy forest with trees covered in moss and spider webs.";
 incorrectRoute1.image = "https://i.pinimg.com/originals/bf/1d/16/bf1d1605e62b31685316fa5ab1f7a32d.jpg";
 const incorrectRoute2 = new Environment("Evil Witch's Castle");
-incorrectRoute2.description = `it is a luxurious, but menacing room in the castle with a massive painting of its owner and a large ornatebed`;
+incorrectRoute2.description = `it is a luxurious, but menacing room in the castle with a massive painting of its occult owner and a large ornate bed.`;
 incorrectRoute2.image = "https://i.pinimg.com/originals/42/33/a1/4233a17feb986420ecd5e248827ad31f.jpg";
 incorrectRoute2.character = witch;
 incorrectRoute2.item = rustyKey;
 const incorrectRoute3 = new Environment("Graveyard");
-incorrectRoute3.description = `it is a creepy graveyard with tombstones and a crows swarming around`;
+incorrectRoute3.description = `it is a creepy graveyard with tombstones and a crows swarming around.`;
 incorrectRoute3.image = "https://cdna.artstation.com/p/assets/images/images/002/748/540/large/yang-qi-.jpg?1465263258";
 const dragonLair = new Environment("Dragon's Lair");
-dragonLair.description = `it is a red-flame lit cave lined with treasure and skeletons of those who have tried to steal it from the Dragon`;
+dragonLair.description = `it is a red-flame lit cave lined with treasure and skeletons of those who have tried to steal it from the Dragon.`;
 dragonLair.image = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7499d872-919e-49d2-b98c-29be33df9d4c/d7xo86x-84a88c18-8dee-4d49-b957-c37b179320e8.jpg/v1/fill/w_1024,h_589,q_75,strp/dragon_s_lair_by_grosnez_d7xo86x-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTg5IiwicGF0aCI6IlwvZlwvNzQ5OWQ4NzItOTE5ZS00OWQyLWI5OGMtMjliZTMzZGY5ZDRjXC9kN3hvODZ4LTg0YTg4YzE4LThkZWUtNGQ0OS1iOTU3LWMzN2IxNzkzMjBlOC5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.zjjEGvyy5PrcBWJV_KCFDVd_yUQcKTPsFRKFPBHO97g";
 dragonLair.character = dragon;
 dragonLair.item = treasureChest;
@@ -353,25 +352,29 @@ incorrectRoute3.linkEnvironment("east", dragonLair);
 //Subroutine to display information about the current environment
 
 function displayEnvironmentInfo(environment) {
-console.log(environment);
+
   let occupantMsg = ""
   let bossMsg = ""
 
   if (environment.character === "") {
     occupantMsg = ""
   } else {
-    occupantMsg = "<p>" + environment.character.describe() + ". " + environment.character.converse()  + "</p>"+ "<h2>" + environment.item.describeItem() + "</h2>";
+    occupantMsg = `<p> ${environment.character.describe()}. ${environment.character.converse()} </p> <h2> ${environment.item.describeItem()} </h2>`;
     environment.item.itemAdd()
     if ( environment.character.ability === undefined ) {
     bossMsg = ""
     } else {
-      bossMsg = "<br>" + "<h2>" + environment.character.name + " attacks you with " + environment.character.ability + "! </h2>";
+      bossMsg = `<br> <h2> ${environment.character.name} attacks you with ${environment.character.ability}! But you successfully dodge the attack and manage to stab the ${environment.character.name} straight into the heart.
+      </h2> <br> <h2> You have defeated the ${environment.character.name}!</h2>
+      <br> <p> Turns out ${environment.character.name} has been guarding a ${environment.item.name}! </p>`;
     }
   }
-  textContent = "<p>" + environment.describe() + "</p>" + occupantMsg + "<p>" + environment.getDetails() + "</p>" + bossMsg;
+  titleContent = environment.name;
+  textContent = `<p> ${environment.describe()}</p>${occupantMsg} <br> ${bossMsg} <p> ${environment.getDetails()} </p>`;
 
+  document.getElementById("titlearea").innerHTML = titleContent;
   document.getElementById("textarea").innerHTML = textContent;
-  document.getElementById("buttonarea").innerHTML = '><input type="text" class="text-center p-2 m-3" id="usertext" placeholder="Enter your choice here" onfocus="inputFocus()" />';
+  document.getElementById("buttonarea").innerHTML = '><input type="text" class="text-center p-2 m-3 fs-3" id="usertext" placeholder="Enter your choice here" onfocus="inputFocus()" />';
   document.getElementById("usertext").focus();
 }
 
