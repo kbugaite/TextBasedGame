@@ -1,4 +1,7 @@
-//My Game code
+//My Game code:
+
+//Create the indiviual environment objects and add their descriptions
+//Using our setters to ensure the data is valid and add descriptions
 
 class Environment {
   constructor(name) {
@@ -29,7 +32,8 @@ class Environment {
   get image() {
     return this._image;
   }
-
+  
+//Setter with a validation if a name string is shorter than 5 characters
   set name(value) {
     if (value.length < 5) {
       alert("Name is too short.");
@@ -59,28 +63,26 @@ class Environment {
   }
 
   //a method to produce friendly environment description
-
   describe() {
     return `Looking around the ${this._name} you can see ${this._description}`;
   }
 
   //a method to add environments to link environments to this one. It does this by adding them to _linkedEnvironments
-
   linkEnvironment(direction, environmentToLink) {
     this._linkedEnvironments[direction] = environmentToLink;
   }
 
   //a method to produce friendly description of linked environments
-
   getDetails() {
+    
     //Getting the entries from the linked environments objects
     const entries = Object.entries(this._linkedEnvironments);
     console.log(entries)
+    
     //Initialise an empty array to store the details
     let details = []
 
     //Loop through the entries and add a description of each environment to the details array so user can choose where to go
-
     for (const [direction, environment] of entries) {
       let text = `<p class="text-center"> The ${environment._name} is to the: </p> <h2 class="m-0 p-0"> ${direction.toUpperCase()} </h2>`;
       details.push(text);
@@ -88,12 +90,7 @@ class Environment {
     return details;
   }
 
-  //a method to move the adventurer to a new environment
-  //method to move to a new environment
-  //Move will take in north, east, south, west
-
-  //Input "north". Output: The environment which is to the north of the current location.
-
+  //a method to move the adventurer to a new environment - it takes in north, east, south, west as directions
   move(direction) {
     if (direction in this._linkedEnvironments) {
       return this._linkedEnvironments[direction];
@@ -104,7 +101,8 @@ class Environment {
     }
   }
 }
-let inventory = ["Old map", "empty coin pouch"];
+//Inventory set as an empty array at the start of the game
+let inventory = [];
 
 class Item {
   constructor(name) {
@@ -136,8 +134,7 @@ class Item {
     return this._description;
   }
 
-  // a method to produce friendly item description
-
+  //A method to produce friendly item description
   describeItem() {
     return `You have found a ${this._name}. It is ${this._description}`;
   }
@@ -150,7 +147,7 @@ class Item {
   }
 }
 
-//class Enemy extends Character {
+// New class for Characters
 class Character {
   constructor(name) {
     this._name = name,
@@ -194,7 +191,6 @@ class Character {
   }
 
   // A method to produce friendly character description
-
   describe() {
     return `<h2>You have met the ${this._name}.</h2> ${this._name} is ${this._description}`;
   }
@@ -205,22 +201,19 @@ class Character {
   }
 }
 
-//Created a subclass of Character for the Boss character with an additional ability property
+//Subclass of Character for the Boss character with an added additional ability as a property and method
 class Boss extends Character {
   constructor(name) {
     super(name);
     this._ability = "";
 }
+//Method for testing the Boss subclass
 showAbility() {
   return console.log(`${this._name} uses: ${this._ability}.`);
 }
 }
 
-
-//create the indiviual environment objects and add their descriptions
-//Using our setters to ensure the data is valid and add descriptions
-
-//Create the characters
+//CHARACTERS OBJECTS - defined here
 const merchant = new Character("Merchant");
 merchant.description = `a vagabond trader dressed in most interesting garments, with a large backpack on his shoulders and a large dusty hat`;
 merchant.conversation = `Hello there, stranger. I have many interesting items for sale.
@@ -233,15 +226,13 @@ const witch = new Character("Witch");
 witch.description = `a lady with cat-like yellow eyes, pale green skin dressed in a black gown, and a crown made of tangled up thorns.`;
 witch.conversation = `How dare you barge into my castle uninvited! What business do you have here? I am the Witch of the West Lands, and I will not tolerate your presence here anymore! I will turn you into a frog if you don't leave right now!`;
 
-//Create the Boss subclass
+//BOSS OBJECT SUBCLASS - defined here
 const dragon = new Boss("Dragon");
 dragon.description = `a large scary creature with red scales and a fiery breath`;
 dragon.conversation = `What are you doing in my lair, pesky adventurer? I am the legendary Smaug, I have guarded this treasure for centuries and I will until the end of time... You'd better leave before I decide to make you my next meal!`;
 dragon.ability = `Fire Breath`;
-// dragon.ability = [`Claw Attack`, `Tail Swipe`, `Fire Breath`];
 
-
-//Create the items here
+//ITEMS OBJECTS - defined here
 const bronzeDagger = new Item("Bronze dagger");
 bronzeDagger.description = `looks a bit worn and old but you hope it will do the job.`;
 const rustyKey = new Item("Rusty Old Key");
@@ -251,7 +242,7 @@ magicKey.description = `a tiny key made of pure gold, which has a sparkling blue
 const treasureChest = new Item("Treasure Chest");
 treasureChest.description = `massive and on the front of it hangs an ancient engraved lock.`;
 
-//ENVIRONMENT OBJECTS defined here
+//ENVIRONMENT OBJECTS - defined here
 const tradingTown = new Environment("Dragonville");
 tradingTown.description = `it is a fairly big medieval trading town with a few shops and a tavern in the main square of the town.`;
 tradingTown.image = "https://c4.wallpaperflare.com/wallpaper/257/647/711/fantasy-art-digital-town-people-fantasy-architecture-hd-wallpaper-preview.jpg";
@@ -286,7 +277,7 @@ dragonLair.character = dragon;
 dragonLair.item = treasureChest;
 
 
-//Link the environments together
+//ENVIRONMENTS LINKED TOGETHER - defined here
 tradingTown.linkEnvironment("east", correctRoute1);
 tradingTown.linkEnvironment("west", incorrectRoute1);
 correctRoute1.linkEnvironment("west", tradingTown);
@@ -304,53 +295,7 @@ correctRoute3.linkEnvironment("west", dragonLair);
 dragonLair.linkEnvironment("west", incorrectRoute3);
 incorrectRoute3.linkEnvironment("east", dragonLair);
 
-
-//Riddles object
-// const riddles = [
-//   {
-//       question: "What is more useful when it is broken?",
-//       answer1:   "A sword",
-//       answer2:   "An egg",
-//       answer3:   "A nose",
-//       correctAnswer: "An egg",
-//   },
-//   {
-//       question: "What belongs to you, but other people use it more than you?",
-//       answer1:   "Your house",
-//       answer2:   "Your backpack",
-//       answer3:   "Your name",
-//       correctAnswer: "Your name",
-//   },
-//   {
-//     question: "You have me today, Tomorrow you'll have more; As your time passes, I'm not easy to store; I don't take up space, But I'm only in one place; I am what you saw, But not what you see. What am I?",
-//     answer1:   "Time",
-//     answer2:   "Memories",
-//     answer3:   "Money",
-//     correctAnswer: "Memories",
-// },
-// ]
-
-//let currentRiddle = 0;
-// let shownRiddle = riddles[currentRiddle]
-
-// loadRiddle()
-
-// function loadRiddle() {
-//     deselectAnswers()
-
-//     const shownRiddle = quizQuestions[currentQuizIndex]
-
-//     question.innerText = shownRiddle.question
-//     answer1.innerText = shownRiddle.answer1
-//     answer2.innerText = shownRiddle.answer2
-//     answer3.innerText = shownRiddle.answer3
-// };
-
-  
-// let bossAttack = 0;
-
 //Subroutine to display information about the current environment
-
 function displayEnvironmentInfo(environment) {
 
   let occupantMsg = ""
@@ -379,21 +324,18 @@ function displayEnvironmentInfo(environment) {
 
   document.getElementById("titlearea").innerHTML = titleContent;
   document.getElementById("textarea").innerHTML = textContent;
-  document.getElementById("buttonarea").innerHTML = '><input type="text" class="text-center p-2 m-3 fs-3" id="usertext" placeholder="Enter your choice here" onfocus="inputFocus()" />';
+  document.getElementById("buttonarea").innerHTML = '><input type="text" class="text-center p-2 m-3 fs-3" id="usertext" placeholder="Your choice here" onfocus="inputFocus()" />';
   document.getElementById("usertext").focus();
 }
 
 // Subroutine to complete inital game set up then handle commands from the user
-
 function startGame() {
   //set and display start environment
   currentEnvironment = tradingTown
   console.log(currentEnvironment)
   displayEnvironmentInfo(currentEnvironment);
 
-
-  //handle commands
-  //We are adding an event listener to entire document view
+  //HANDLE COMMANDS - We are adding an event listener to entire document view
   document.addEventListener("keydown", function (event) {
 
     if (event.key === "Enter") {
